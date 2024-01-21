@@ -6,6 +6,7 @@ namespace SnapCalc
     public partial class MainPage : ContentPage
     {
         private const double fallbackAperture = 1.8;
+        private const int    fallbackIso      = 100;
 
         public MainPage()
         {
@@ -14,9 +15,7 @@ namespace SnapCalc
             InitNdFilters();
             InitShutterSpeed();
             InitAperture();
-
-            //Iso1.SelectedIndex      = 0;
-            //Iso2.SelectedIndex      = 0;
+            InitIso();
         }
 
 
@@ -115,7 +114,7 @@ namespace SnapCalc
 
         private void InitAperture()
         {
-            List<string> itemsApertureCurrent =
+            List<string> itemsAperture =
                 [
                     "f1.8",
                     "f2.0",
@@ -134,13 +133,39 @@ namespace SnapCalc
                     "f11.0",
                     "f13.0"
                 ];
-            CurrentAperture.ItemsSource = itemsApertureCurrent;
+            CurrentAperture.ItemsSource = itemsAperture;
 
             // Default current aperture is not fully wide open
-            CurrentAperture.Position = itemsApertureCurrent.IndexOf("f2.8");
+            CurrentAperture.Position = itemsAperture.IndexOf("f2.8");
 
-            // The new aperture has extra option as default
-            NewAperture.ItemsSource = new List<string> { "same aperture" }.Concat(itemsApertureCurrent);
+            // The new aperture has extra option
+            NewAperture.ItemsSource = new List<string> { "same aperture" }.Concat(itemsAperture);
+        }
+
+
+        private void InitIso()
+        {
+            List<string> itemsIso = [
+                "50 ISO",
+                "100 ISO",
+                "200 ISO",
+                "400 ISO",
+                "800 ISO",
+                "1600 ISO",
+                "3200 ISO",
+                "6400 ISO",
+                "12800 ISO",
+                "12800 ISO",
+                "25600 ISO"
+            ];
+
+            CurrentIso.ItemsSource = itemsIso;
+
+            // Default current ISO is at 100
+            CurrentIso.Position = itemsIso.IndexOf("100 ISO");
+
+            // The new ISO has extra option
+            NewIso.ItemsSource = new List<string> { "same ISO" }.Concat(itemsIso);
         }
 
 
@@ -155,7 +180,7 @@ namespace SnapCalc
 
             if (requestedValue is "same aperture")
             {
-                if (backupCarousel is null)
+                if (backupCarousel is null || backupCarousel.CurrentItem is null)
                 {
                     return fallbackAperture;
                 }
@@ -167,46 +192,46 @@ namespace SnapCalc
         }
 
 
-        private static int GetIso(string current, string? original = null)
+        private static double GetIsoStops(CarouselView requestedCarousel, CarouselView? backupCarousel = null)
         {
-            if (current is null)
+            var requestedValue = (string)requestedCarousel.CurrentItem;
+
+            if (requestedValue is null)
             {
-                return 100;
+                return fallbackIso;
             }
 
-            if (current is "same ISO")
+            if (requestedValue is "same ISO")
             {
-                if (string.IsNullOrEmpty(original))
+                if (backupCarousel is null || backupCarousel.CurrentItem is null)
                 {
-                    return 0;
+                    return fallbackIso;
                 }
 
-                return int.Parse(original[..^4]);
+                return Math.Log2(int.Parse(((string)backupCarousel.CurrentItem)[..^4]) / 100.0);
             }
 
-            return int.Parse(current[..^4]);
+            return Math.Log2(int.Parse(requestedValue[..^4]) / 100.0);
         }
 
 
         private double GetEv()
         {
             // https://en.wikipedia.org/wiki/Exposure_value
-            var aperture = GetAperture(CurrentAperture);
-            var iso = GetIso((string)Iso1.SelectedItem);
+            double aperture    = GetAperture(CurrentAperture);
+            double isoStops    = GetIsoStops(CurrentIso);
             double shutterTime = ((ShutterSpeedItem)CurrentShutter.CurrentItem)?.Seconds ?? 1;
-
-            var ev = Math.Log2(aperture * aperture / shutterTime) - Math.Log2(iso / 100);
+            double ev          = Math.Log2(aperture * aperture / shutterTime) - isoStops;
             return ev;
         }
 
 
         private double CalculateShutterSpeed(double ev)
         {
-            var aperture = GetAperture(NewAperture, CurrentAperture);
-            var iso = GetIso((string)Iso2.SelectedItem, (string)Iso1.SelectedItem);
-
-            ev += Math.Log2(iso / 100); // And compensate for the new ISO
-            var shutterSpeed = aperture * aperture / Math.Pow(2, ev);
+            double aperture     = GetAperture(NewAperture, CurrentAperture);
+            double isoStops     = GetIsoStops(NewIso, CurrentIso);
+            double newEv        = ev + isoStops; // And compensate for the new ISO
+            double shutterSpeed = aperture * aperture / Math.Pow(2, newEv);
             return shutterSpeed;
         }
 

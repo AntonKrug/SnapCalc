@@ -52,23 +52,22 @@
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
-            
 
-            <Picker x:Name="Iso1" Title="ISO" SelectedIndexChanged="OnAnythingChange">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>100 ISO</x:String>
-                        <x:String>200 ISO</x:String>
-                        <x:String>400 ISO</x:String>
-                        <x:String>800 ISO</x:String>
-                        <x:String>1600 ISO</x:String>
-                        <x:String>3200 ISO</x:String>
-                        <x:String>6400 ISO</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
 
-            
+            <CarouselView x:Name="CurrentIso" Loop="False" PeekAreaInsets="140" PositionChanged="OnAnythingChange">
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
+                </CarouselView.ItemsLayout>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Label FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="{Binding .}" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+
             <Label x:Name="Ev" Text="? EV" Style="{StaticResource NormalText}" />
 
             
@@ -123,22 +122,20 @@
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
-            
 
-            <Picker x:Name="Iso2" Title="ISO">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>same ISO</x:String>
-                        <x:String>100 ISO</x:String>
-                        <x:String>200 ISO</x:String>
-                        <x:String>400 ISO</x:String>
-                        <x:String>800 ISO</x:String>
-                        <x:String>1600 ISO</x:String>
-                        <x:String>3200 ISO</x:String>
-                        <x:String>6400 ISO</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
+
+            <CarouselView x:Name="NewIso" Loop="False" PeekAreaInsets="140" PositionChanged="OnAnythingChange">
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
+                </CarouselView.ItemsLayout>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Label FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="{Binding .}" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
 
         </VerticalStackLayout>
     </ScrollView>

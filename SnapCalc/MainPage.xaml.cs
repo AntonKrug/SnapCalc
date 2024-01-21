@@ -13,7 +13,6 @@ namespace SnapCalc
 
             Aperture1.SelectedIndex = 2;  // f2.8
             Aperture2.SelectedIndex = 0;
-            Shutter1.SelectedIndex  = 10; // 1/80
             Iso1.SelectedIndex      = 0;
             Iso2.SelectedIndex      = 0;
 
@@ -196,7 +195,7 @@ namespace SnapCalc
 
             NewShutterSpeed.Text = $"{newShutterSpeed / 60:00}min {newShutterSpeed % 60:00}sec ({newNdCombined:F2} ND stops)";
 
-            Ev.Text = $"{ev:F2} EV ({CalculateLux(ev):F2} lux and {currentNd:F1} stops of ND in original exposure)";
+            Ev.Text = $"{ev:F1}EV {CalculateLux(ev):F1}lux with ND {currentNd:F1}stops in current exposure";
         }
 
 

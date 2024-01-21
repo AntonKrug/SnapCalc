@@ -77,13 +77,13 @@
                 </Picker.ItemsSource>
             </Picker>
 
+            <Label x:Name="Ev" Text="? EV" Style="{StaticResource NormalText}" />
 
             <!--<Line X2="{Binding Width, Source={RelativeSource Self}}" Stroke="DarkBlue" StrokeDashArray="10,10" StrokeDashOffset="6" />-->
 
             <Label x:Name="NewShutterSpeed" Text="" Style="{StaticResource SubHeadline}" />
 
 
-            <Label x:Name="Ev" Text="? EV" Style="{StaticResource NormalText}" />
 
 
             <CarouselView x:Name="NewNd1" Loop="False" PeekAreaInsets="140" PositionChanged="OnAnythingChange">

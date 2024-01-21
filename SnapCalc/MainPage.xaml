@@ -8,7 +8,10 @@
             
             <Image Source="snapcalc.png" HeightRequest="64" Aspect="AspectFit"/>
 
-            <CarouselView x:Name="currentNd" Loop="False">
+            <CarouselView x:Name="currentNd" Loop="False" PeekAreaInsets="120">
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory"/>
+                </CarouselView.ItemsLayout>
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
                         <VerticalStackLayout>

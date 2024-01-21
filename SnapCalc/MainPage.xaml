@@ -39,29 +39,20 @@
                 </CarouselView.ItemTemplate>
             </CarouselView>
 
-            
-            <Picker x:Name="Aperture1" Title="Aperture" SelectedIndexChanged="OnAnythingChange">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>f1.8</x:String>
-                        <x:String>f2.0</x:String>
-                        <x:String>f2.8</x:String>
-                        <x:String>f3.2</x:String>
-                        <x:String>f3.5</x:String>
-                        <x:String>f4.0</x:String>
-                        <x:String>f4.5</x:String>
-                        <x:String>f5.0</x:String>
-                        <x:String>f5.6</x:String>
-                        <x:String>f6.3</x:String>
-                        <x:String>f7.1</x:String>
-                        <x:String>f8.0</x:String>
-                        <x:String>f9.0</x:String>
-                        <x:String>f10.0</x:String>
-                        <x:String>f11.0</x:String>                        
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
 
+            <CarouselView x:Name="CurrentAperture" Loop="False" PeekAreaInsets="140" PositionChanged="OnAnythingChange">
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
+                </CarouselView.ItemsLayout>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Label FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="{Binding .}" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            
 
             <Picker x:Name="Iso1" Title="ISO" SelectedIndexChanged="OnAnythingChange">
                 <Picker.ItemsSource>
@@ -77,13 +68,14 @@
                 </Picker.ItemsSource>
             </Picker>
 
+            
             <Label x:Name="Ev" Text="? EV" Style="{StaticResource NormalText}" />
 
+            
             <!--<Line X2="{Binding Width, Source={RelativeSource Self}}" Stroke="DarkBlue" StrokeDashArray="10,10" StrokeDashOffset="6" />-->
 
+            
             <Label x:Name="NewShutterSpeed" Text="" Style="{StaticResource SubHeadline}" />
-
-
 
 
             <CarouselView x:Name="NewNd1" Loop="False" PeekAreaInsets="140" PositionChanged="OnAnythingChange">
@@ -119,28 +111,19 @@
             <Label x:Name="NewNdCombined" Text="" Style="{StaticResource NormalText}" />
 
 
-            <Picker x:Name="Aperture2" Title="Aperture">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>same aperture</x:String>
-                        <x:String>f1.8</x:String>
-                        <x:String>f2.0</x:String>
-                        <x:String>f2.8</x:String>
-                        <x:String>f3.2</x:String>
-                        <x:String>f3.5</x:String>
-                        <x:String>f4.0</x:String>
-                        <x:String>f4.5</x:String>
-                        <x:String>f5.0</x:String>
-                        <x:String>f5.6</x:String>
-                        <x:String>f6.3</x:String>
-                        <x:String>f7.1</x:String>
-                        <x:String>f8.0</x:String>
-                        <x:String>f9.0</x:String>
-                        <x:String>f10.0</x:String>
-                        <x:String>f11.0</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
+            <CarouselView x:Name="NewAperture" Loop="False" PeekAreaInsets="140" PositionChanged="OnAnythingChange">
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
+                </CarouselView.ItemsLayout>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Label FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="{Binding .}" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            
 
             <Picker x:Name="Iso2" Title="ISO">
                 <Picker.ItemsSource>

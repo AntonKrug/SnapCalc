@@ -5,37 +5,46 @@ namespace SnapCalc
 {
     public partial class MainPage : ContentPage
     {
-
+        private const double fallbackAperture = 1.8;
 
         public MainPage()
         {
             InitializeComponent();
 
-            Aperture1.SelectedIndex = 2;  // f2.8
-            Aperture2.SelectedIndex = 0;
-            Iso1.SelectedIndex      = 0;
-            Iso2.SelectedIndex      = 0;
+            InitNdFilters();
+            InitShutterSpeed();
+            InitAperture();
 
-            // ND filters
+            //Iso1.SelectedIndex      = 0;
+            //Iso2.SelectedIndex      = 0;
+        }
+
+
+        private void InitNdFilters()
+        {
             List<FilterItem> itemsFilter =
-                [
-                    new() { Name = "ND1",    Stops = 0,               Description = "no filter" },
-                    new() { Name = "ND2",    Stops = 1,               Description = "1 stop variable" },
-                    new() { Name = "ND4",    Stops = 2,               Description = "2 stops" },
-                    new() { Name = "ND8",    Stops = 3,               Description = "3 stops" },
-                    new() { Name = "ND16",   Stops = 4,               Description = "4 stops variable" },
-                    new() { Name = "ND32",   Stops = 5,               Description = "5 stops variable" },
-                    new() { Name = "ND64",   Stops = 6,               Description = "6 stops" },
-                    new() { Name = "ND1000", Stops = Math.Log2(1000), Description = "~10 stops" },
-                ];
+            [
+                new() { Name = "ND1",    Stops = 0,               Description = "no filter" },
+                new() { Name = "ND2",    Stops = 1,               Description = "1 stop variable" },
+                new() { Name = "ND4",    Stops = 2,               Description = "2 stops" },
+                new() { Name = "ND8",    Stops = 3,               Description = "3 stops" },
+                new() { Name = "ND16",   Stops = 4,               Description = "4 stops variable" },
+                new() { Name = "ND32",   Stops = 5,               Description = "5 stops variable" },
+                new() { Name = "ND64",   Stops = 6,               Description = "6 stops" },
+                new() { Name = "ND1000", Stops = Math.Log2(1000), Description = "~10 stops" },
+            ];
 
             CurrentNd.ItemsSource = itemsFilter;
             NewNd1.ItemsSource = itemsFilter;
             NewNd2.ItemsSource = itemsFilter;
-            // The last filter option is the default position for NewNd1
-            NewNd1.Position = itemsFilter.Count-1; 
 
-            // Shutter speed
+            // The last filter option is the default position for NewNd1
+            //NewNd1.Position = itemsFilter.Count - 1;
+        }
+
+
+        private void InitShutterSpeed()
+        {
             List<ShutterSpeedItem> itemsShutterSpeed =
                 [
                     new ShutterSpeedItem("16000"),
@@ -97,32 +106,63 @@ namespace SnapCalc
                     new ShutterSpeedItem("25\""),
                     new ShutterSpeedItem("30\"")
                 ];
-
             CurrentShutter.ItemsSource = itemsShutterSpeed;
 
             // Default possition is the 1/100 shutter speed
-            CurrentShutter.Position = itemsShutterSpeed.FindIndex(i => i.Abbreviation == "100"); 
+            //CurrentShutter.Position = itemsShutterSpeed.FindIndex(i => i.Abbreviation == "100");
         }
 
 
-        private static double GetAperture(string current, string? original = null)
+        private void InitAperture()
         {
-            if (current is null)
+            List<string> itemsApertureCurrent =
+                [
+                    "f1.8",
+                    "f2.0",
+                    "f2.8",
+                    "f3.2",
+                    "f3.5",
+                    "f4.0",
+                    "f4.5",
+                    "f5.0",
+                    "f5.6",
+                    "f6.3",
+                    "f7.1",
+                    "f8.0",
+                    "f9.0",
+                    "f10.0",
+                    "f11.0",
+                    "f13.0"
+                ];
+            CurrentAperture.ItemsSource = itemsApertureCurrent;
+
+            // Default current aperture is not fully wide open
+            //CurrentAperture.Position = itemsApertureCurrent.IndexOf("f2.8");
+
+            // The new aperture has extra option as default
+            NewAperture.ItemsSource = new List<string> { "same aperture" }.Concat(itemsApertureCurrent);
+        }
+
+
+        private static double GetAperture(CarouselView requestedCarousel, CarouselView? backupCarousel = null)
+        {
+            if (requestedCarousel is null)
             {
-                return 1.8;
+                return fallbackAperture;
             }
 
-            if (current is "same aperture")
+            var requestedValue = (string)requestedCarousel.CurrentItem;
+            if (requestedValue is "same aperture")
             {
-                if (string.IsNullOrEmpty(original))
+                if (backupCarousel is null)
                 {
-                    return 0;
+                    return fallbackAperture;
                 }
 
-                return double.Parse(original[1..]);
+                return double.Parse(((string)backupCarousel.CurrentItem)[1..]);
             }
 
-            return double.Parse(current[1..]);
+            return double.Parse(requestedValue[1..]);
         }
 
 
@@ -150,7 +190,7 @@ namespace SnapCalc
         private double GetEv()
         {
             // https://en.wikipedia.org/wiki/Exposure_value
-            var aperture = GetAperture((string)Aperture1.SelectedItem);
+            var aperture = GetAperture(CurrentAperture);
             var iso = GetIso((string)Iso1.SelectedItem);
             double shutterTime = ((ShutterSpeedItem)CurrentShutter.CurrentItem)?.Seconds ?? 1;
 
@@ -161,7 +201,7 @@ namespace SnapCalc
 
         private double CalculateShutterSpeed(double ev)
         {
-            var aperture = GetAperture((string)Aperture2.SelectedItem, (string)Aperture1.SelectedItem);
+            var aperture = GetAperture(NewAperture, CurrentAperture);
             var iso = GetIso((string)Iso2.SelectedItem, (string)Iso1.SelectedItem);
 
             ev += Math.Log2(iso / 100); // And compensate for the new ISO

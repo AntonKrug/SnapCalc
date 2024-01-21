@@ -115,6 +115,9 @@
                 </CarouselView.ItemTemplate>
             </CarouselView>
 
+            
+            <Label x:Name="NewNdCombined" Text="" Style="{StaticResource NormalText}" />
+
 
             <Picker x:Name="Aperture2" Title="Aperture">
                 <Picker.ItemsSource>

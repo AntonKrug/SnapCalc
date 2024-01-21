@@ -190,12 +190,25 @@ namespace SnapCalc
             var newNd1 = GetNdFilter(NewNd1);
             var newNd2 = GetNdFilter(NewNd2);
             var newNdCombined = newNd1 + newNd2;
-
             var newShutterSpeed = CalculateShutterSpeed(ev - newNdCombined);
 
-            NewShutterSpeed.Text = $"{newShutterSpeed / 60:00}min {newShutterSpeed % 60:00}sec ({newNdCombined:F2} ND stops)";
+            Ev.Text = $"{ev:F1}EV {CalculateLux(ev):F2}lux with ND {currentNd:F1}stops in current exposure";
 
-            Ev.Text = $"{ev:F1}EV {CalculateLux(ev):F1}lux with ND {currentNd:F1}stops in current exposure";
+            NewNdCombined.Text = $"Combined {newNdCombined:F2} ND stops";
+
+            int hours = (int)Math.Round(newShutterSpeed / (60 * 60));
+            int minutes = (int)Math.Round((newShutterSpeed / 60) % 60);
+            int seconds = (int)Math.Round(newShutterSpeed % 60);
+
+            if (hours > 0)
+            {
+                NewShutterSpeed.Text = $"Bulb {hours:00}:{minutes:00}:{seconds:00} (h:min:sec)";
+            }
+            else
+            {
+                NewShutterSpeed.Text = $"Bulb {minutes:00}:{seconds:00} (min:sec)";
+            }
+
         }
 
 

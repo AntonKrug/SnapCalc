@@ -194,7 +194,7 @@ namespace SnapCalc
 
             Ev.Text = $"{ev:F1}EV {CalculateLux(ev):F2}lux with ND {currentNd:F1}stops in current exposure";
 
-            NewNdCombined.Text = $"Combined {newNdCombined:F2} ND stops";
+            NewNdCombined.Text = $"Combined ND is {newNdCombined:F2} stops";
 
             int hours = (int)Math.Round(newShutterSpeed / (60 * 60));
             int minutes = (int)Math.Round((newShutterSpeed / 60) % 60);

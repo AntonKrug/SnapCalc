@@ -17,24 +17,21 @@ namespace SnapCalc
             Iso1.SelectedIndex      = 0;
             Iso2.SelectedIndex      = 0;
 
-            NdOrig.SelectedIndex = 0;
-            NdNew1.SelectedIndex = 7;
-            NdNew2.SelectedIndex = 0;
-            NdNew3.SelectedIndex = 0;
-
-            List<FilterItem> itemsFilter = new()
-            {
+            List<FilterItem> itemsFilter =
+            [
                 new() { Name = "ND0",    Stops = 0,               Description="no filter"},
-                new() { Name = "ND2",    Stops = 1,               Description="1 stop variable filter"},
+                new() { Name = "ND2",    Stops = 1,               Description="1 stop var. filter"},
                 new() { Name = "ND4",    Stops = 2,               Description="2 stops"},
                 new() { Name = "ND8",    Stops = 3,               Description="3 stops"},
-                new() { Name = "ND16",   Stops = 4,               Description="4 stops variable filter"},
-                new() { Name = "ND32",   Stops = 5,               Description="5 stops variable filter"},
+                new() { Name = "ND16",   Stops = 4,               Description="4 stops var. filter"},
+                new() { Name = "ND32",   Stops = 5,               Description="5 stops var. filter"},
                 new() { Name = "ND64",   Stops = 6,               Description="6 stops"},
                 new() { Name = "ND1000", Stops = Math.Log2(1000), Description="~10 stops"},
-
-            };
-            currentNd.ItemsSource = itemsFilter;
+            ];
+            CurrentNd.ItemsSource = itemsFilter;
+            NewNd1.ItemsSource = itemsFilter;
+            NewNd1.Position = 7; // the ND1000 is default position for this filter
+            NewNd2.ItemsSource = itemsFilter;
         }
 
 
@@ -115,7 +112,7 @@ namespace SnapCalc
             return EV;
         }
 
-        private double GetNewShutterSpeed(double ev)
+        private double CalculateShutterSpeed(double ev)
         {
             var N = GetAperture((string)Aperture2.SelectedItem, (string)Aperture1.SelectedItem);
             var S = GetIso((string)Iso2.SelectedItem, (string)Iso1.SelectedItem);
@@ -126,53 +123,33 @@ namespace SnapCalc
         }
 
 
-        private static double GetLux(double ev)
+        private static double CalculateLux(double ev)
         {
             var L = Math.Pow(2, ev - 2.84);
             return L;
         }
 
 
-        private static double GetNd(string current)
+        private static double GetNdFilter(CarouselView filter)
         {
-            if (current is null or "no ND")
-            {
-                return 0;
-            }
-
-            // clean up postfix ND2(1)-variable
-            const string postfix = "-variable";
-            if (current.Contains(postfix))
-            {
-                current = current[..^postfix.Length];
-            }
-
-            // remove brackets ND1000(~10)
-            int openBracket = current.IndexOf('(');
-            if (openBracket > 0)
-            {
-                current = current.Substring(0, openBracket);
-            }
-
-            // remove the ND prefix and convert back to log
-            return Math.Log2(double.Parse(current[2..]));
+            return ((FilterItem)(filter.CurrentItem))?.Stops ?? 0;
         }
 
 
         private void OnAnythingChange(object sender, EventArgs e)
         {
-            var ndOrig = GetNd((string)NdOrig.SelectedItem);
-            var ev = GetEv() + ndOrig;
+            var currentNd = GetNdFilter(CurrentNd);
+            var ev = GetEv() + currentNd;
 
-            var nd1 = GetNd((string)NdNew1.SelectedItem);
-            var nd2 = GetNd((string)NdNew2.SelectedItem);
-            var nd3 = GetNd((string)NdNew3.SelectedItem);
+            var newNd1 = GetNdFilter(NewNd1);
+            var newNd2 = GetNdFilter(NewNd2);
+            var newNdCombined = newNd1 + newNd2;
 
-            var newShutterSpeed = GetNewShutterSpeed(ev - nd1 - nd2 - nd3);
+            var newShutterSpeed = CalculateShutterSpeed(ev - newNdCombined);
 
-            NewShutterSpeed.Text = $"{newShutterSpeed / 60:00}min {newShutterSpeed % 60:00}sec ({nd1 + nd2 + nd3:F2} ND stops)";
+            NewShutterSpeed.Text = $"{newShutterSpeed / 60:00}min {newShutterSpeed % 60:00}sec ({newNdCombined:F2} ND stops)";
 
-            Ev.Text = $"{ev:F2} EV ({GetLux(ev):F2} lux and {ndOrig:F1} stops of ND in original exposure)";
+            Ev.Text = $"{ev:F2} EV ({CalculateLux(ev):F2} lux and {currentNd:F1} stops of ND in original exposure)";
         }
 
 

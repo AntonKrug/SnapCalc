@@ -158,14 +158,15 @@ namespace SnapCalc
             return ev;
         }
 
+
         private double CalculateShutterSpeed(double ev)
         {
-            var N = GetAperture((string)Aperture2.SelectedItem, (string)Aperture1.SelectedItem);
-            var S = GetIso((string)Iso2.SelectedItem, (string)Iso1.SelectedItem);
+            var aperture = GetAperture((string)Aperture2.SelectedItem, (string)Aperture1.SelectedItem);
+            var iso = GetIso((string)Iso2.SelectedItem, (string)Iso1.SelectedItem);
 
-            ev += Math.Log2(S / 100); // Compensate for the new ISO
-            var t = (N * N) / Math.Pow(2, ev);
-            return t;
+            ev += Math.Log2(iso / 100); // And compensate for the new ISO
+            var shutterSpeed = aperture * aperture / Math.Pow(2, ev);
+            return shutterSpeed;
         }
 
 
@@ -196,7 +197,7 @@ namespace SnapCalc
 
             NewNdCombined.Text = $"Combined ND is {newNdCombined:F2} stops";
 
-            int hours = (int)Math.Round(newShutterSpeed / (60 * 60));
+            int hours   = (int)Math.Round(newShutterSpeed / (60 * 60));
             int minutes = (int)Math.Round((newShutterSpeed / 60) % 60);
             int seconds = (int)Math.Round(newShutterSpeed % 60);
 

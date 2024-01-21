@@ -6,8 +6,10 @@
     <ScrollView>
         <VerticalStackLayout Padding="10,0" Spacing="16">
             
+            
             <Image Source="snapcalc.png" HeightRequest="64" Aspect="AspectFit"/>
 
+            
             <CarouselView x:Name="CurrentNd" Loop="False" PeekAreaInsets="140" PositionChanged="OnAnythingChange">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
@@ -22,57 +24,20 @@
                 </CarouselView.ItemTemplate>
             </CarouselView>
 
-            <Picker x:Name="Shutter1" Title="Shutter" SelectedIndexChanged="OnAnythingChange">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>1/800s</x:String>
-                        <x:String>1/640s</x:String>
-                        <x:String>1/500s</x:String>
-                        <x:String>1/400s</x:String>
-                        <x:String>1/320s</x:String>
-                        <x:String>1/250s</x:String>
-                        <x:String>1/200s</x:String>
-                        <x:String>1/160s</x:String>
-                        <x:String>1/125s</x:String>
-                        <x:String>1/100s</x:String>
-                        <x:String>1/80s</x:String>
-                        <x:String>1/60s</x:String>
-                        <x:String>1/50s</x:String>
-                        <x:String>1/40s</x:String>
-                        <x:String>1/30s</x:String>
-                        <x:String>1/25s</x:String>
-                        <x:String>1/20s</x:String>
-                        <x:String>1/15s</x:String>
-                        <x:String>1/13s</x:String>
-                        <x:String>1/10s</x:String>
-                        <x:String>1/8s</x:String>
-                        <x:String>1/6s</x:String>
-                        <x:String>1/5s</x:String>
-                        <x:String>1/4s</x:String>
-                        <x:String>0.3s</x:String>
-                        <x:String>0.4s</x:String>
-                        <x:String>0.5s</x:String>
-                        <x:String>0.6s</x:String>
-                        <x:String>0.8s</x:String>
-                        <x:String>1s</x:String>
-                        <x:String>1.3s</x:String>
-                        <x:String>1.6s</x:String>
-                        <x:String>2s</x:String>
-                        <x:String>2.5s</x:String>
-                        <x:String>3.2s</x:String>
-                        <x:String>4s</x:String>
-                        <x:String>5s</x:String>
-                        <x:String>6s</x:String>
-                        <x:String>8s</x:String>
-                        <x:String>10s</x:String>
-                        <x:String>13s</x:String>
-                        <x:String>15s</x:String>
-                        <x:String>20s</x:String>
-                        <x:String>25s</x:String>
-                        <x:String>30s</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
+            
+            <CarouselView x:Name="CurrentShutter" Loop="False" PeekAreaInsets="140" PositionChanged="OnAnythingChange">
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
+                </CarouselView.ItemsLayout>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Label FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="{Binding Abbreviation}" />
+                            <Label FontSize="Micro" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="{Binding SecondsFormated}" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
 
             
             <Picker x:Name="Aperture1" Title="Aperture" SelectedIndexChanged="OnAnythingChange">
@@ -96,8 +61,6 @@
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
-
-            <!--<Label Text="{Binding Source={x:Reference Aperture1}, Path=SelectedItem}" />-->
 
 
             <Picker x:Name="Iso1" Title="ISO" SelectedIndexChanged="OnAnythingChange">

@@ -24,14 +24,14 @@ namespace SnapCalc
 
             List<FilterItem> itemsFilter = new()
             {
-                new() { Name = "no filter", Stops = 0,               Description="no ND filter applied"},
-                new() { Name = "ND2",       Stops = 1,               Description="1 stop variable ND filter"},
-                new() { Name = "ND4",       Stops = 2,               Description="2 stops"},
-                new() { Name = "ND8",       Stops = 3,               Description="3 stops"},
-                new() { Name = "ND16",      Stops = 4,               Description="4 stops variable ND filter"},
-                new() { Name = "ND32",      Stops = 5,               Description="5 stops variable ND filter"},
-                new() { Name = "ND64",      Stops = 6,               Description="6 stops"},
-                new() { Name = "ND1000",    Stops = Math.Log2(1000), Description="almost 10 stops"},
+                new() { Name = "ND0",    Stops = 0,               Description="no filter"},
+                new() { Name = "ND2",    Stops = 1,               Description="1 stop variable filter"},
+                new() { Name = "ND4",    Stops = 2,               Description="2 stops"},
+                new() { Name = "ND8",    Stops = 3,               Description="3 stops"},
+                new() { Name = "ND16",   Stops = 4,               Description="4 stops variable filter"},
+                new() { Name = "ND32",   Stops = 5,               Description="5 stops variable filter"},
+                new() { Name = "ND64",   Stops = 6,               Description="6 stops"},
+                new() { Name = "ND1000", Stops = Math.Log2(1000), Description="~10 stops"},
 
             };
             currentNd.ItemsSource = itemsFilter;

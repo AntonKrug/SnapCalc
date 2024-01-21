@@ -39,7 +39,7 @@ namespace SnapCalc
             NewNd2.ItemsSource = itemsFilter;
 
             // The last filter option is the default position for NewNd1
-            //NewNd1.Position = itemsFilter.Count - 1;
+            NewNd1.Position = itemsFilter.Count - 1;
         }
 
 
@@ -109,7 +109,7 @@ namespace SnapCalc
             CurrentShutter.ItemsSource = itemsShutterSpeed;
 
             // Default possition is the 1/100 shutter speed
-            //CurrentShutter.Position = itemsShutterSpeed.FindIndex(i => i.Abbreviation == "100");
+            CurrentShutter.Position = itemsShutterSpeed.FindIndex(i => i.Abbreviation == "100");
         }
 
 
@@ -137,7 +137,7 @@ namespace SnapCalc
             CurrentAperture.ItemsSource = itemsApertureCurrent;
 
             // Default current aperture is not fully wide open
-            //CurrentAperture.Position = itemsApertureCurrent.IndexOf("f2.8");
+            CurrentAperture.Position = itemsApertureCurrent.IndexOf("f2.8");
 
             // The new aperture has extra option as default
             NewAperture.ItemsSource = new List<string> { "same aperture" }.Concat(itemsApertureCurrent);
@@ -146,12 +146,13 @@ namespace SnapCalc
 
         private static double GetAperture(CarouselView requestedCarousel, CarouselView? backupCarousel = null)
         {
-            if (requestedCarousel is null)
+            var requestedValue = (string)requestedCarousel.CurrentItem;
+
+            if (requestedValue is null)
             {
                 return fallbackAperture;
             }
 
-            var requestedValue = (string)requestedCarousel.CurrentItem;
             if (requestedValue is "same aperture")
             {
                 if (backupCarousel is null)

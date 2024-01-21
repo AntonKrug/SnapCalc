@@ -4,7 +4,7 @@
              x:Class="SnapCalc.MainPage">
 
     <ScrollView>
-        <VerticalStackLayout Padding="10,0" Spacing="16">
+        <VerticalStackLayout Padding="10,0" Spacing="24">
             
             
             <Image Source="snapcalc.png" HeightRequest="64" Aspect="AspectFit"/>

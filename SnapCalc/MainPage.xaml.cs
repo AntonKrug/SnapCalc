@@ -259,7 +259,7 @@ namespace SnapCalc
             var newNdCombined = newNd1 + newNd2;
             var newShutterSpeed = CalculateShutterSpeed(ev - newNdCombined);
 
-            Ev.Text = $"{ev:F1}EV {CalculateLux(ev):F2}lux with ND {currentNd:F1}stops in current exposure";
+            Ev.Text = $"Current exposure: {ev:F1}EV {CalculateLux(ev):F2}lux with ND {currentNd:F1}stops";
 
             NewNdCombined.Text = $"Combined ND is {newNdCombined:F2} stops";
 

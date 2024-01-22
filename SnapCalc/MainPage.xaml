@@ -70,12 +70,8 @@
 
             <Label x:Name="Ev" Text="? EV" Style="{StaticResource NormalText}" />
 
-            
-            <!--<Line X2="{Binding Width, Source={RelativeSource Self}}" Stroke="DarkBlue" StrokeDashArray="10,10" StrokeDashOffset="6" />-->
 
-            
-            <Label x:Name="NewShutterSpeed" Text="" Style="{StaticResource SubHeadline}" />
-
+            <Line X2="{Binding Width, Source={RelativeSource Self}}" Stroke="Gray" StrokeDashArray="10,10" />
 
             <CarouselView x:Name="NewNd1" Loop="False" PeekAreaInsets="140" PositionChanged="OnAnythingChange">
                 <CarouselView.ItemsLayout>
@@ -137,6 +133,10 @@
                 </CarouselView.ItemTemplate>
             </CarouselView>
 
+
+            <Label x:Name="NewShutterSpeed" Text="" Style="{StaticResource SubHeadline}" />
+
+            
         </VerticalStackLayout>
     </ScrollView>
 

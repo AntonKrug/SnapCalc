@@ -146,23 +146,23 @@ namespace SnapCalc
         private void InitIso()
         {
             List<string> itemsIso = [
-                "50 ISO",
-                "100 ISO",
-                "200 ISO",
-                "400 ISO",
-                "800 ISO",
-                "1600 ISO",
-                "3200 ISO",
-                "6400 ISO",
-                "12800 ISO",
-                "12800 ISO",
-                "25600 ISO"
+                "ISO 50",
+                "ISO 100",
+                "ISO 200",
+                "ISO 400",
+                "ISO 800",
+                "ISO 1600",
+                "ISO 3200",
+                "ISO 6400",
+                "ISO 12800",
+                "ISO 12800",
+                "ISO 25600"
             ];
 
             CurrentIso.ItemsSource = itemsIso;
 
             // Default current ISO is at 100
-            CurrentIso.Position = itemsIso.IndexOf("100 ISO");
+            CurrentIso.Position = itemsIso.IndexOf("ISO 100");
 
             // The new ISO has extra option
             NewIso.ItemsSource = new List<string> { "same ISO" }.Concat(itemsIso);
@@ -180,6 +180,7 @@ namespace SnapCalc
 
             if (requestedValue is "same aperture")
             {
+                // requested value is referencing the backup value
                 if (backupCarousel is null || backupCarousel.CurrentItem is null)
                 {
                     return fallbackAperture;
@@ -203,15 +204,16 @@ namespace SnapCalc
 
             if (requestedValue is "same ISO")
             {
+                // requested value is referencing the backup value
                 if (backupCarousel is null || backupCarousel.CurrentItem is null)
                 {
                     return fallbackIso;
                 }
 
-                return Math.Log2(int.Parse(((string)backupCarousel.CurrentItem)[..^4]) / 100.0);
+                return Math.Log2(int.Parse(((string)backupCarousel.CurrentItem)[4..]) / 100.0);
             }
 
-            return Math.Log2(int.Parse(requestedValue[..^4]) / 100.0);
+            return Math.Log2(int.Parse(requestedValue[4..]) / 100.0);
         }
 
 

@@ -7,7 +7,7 @@
         <VerticalStackLayout Padding="10,0" Spacing="24">
 
 
-            <Image Source="snapcalc.png" HeightRequest="64" Aspect="AspectFit"/>
+            <!--<Image Source="snapcalc.png" HeightRequest="64" Aspect="AspectFit"/>-->
 
 
             <CarouselView x:Name="CurrentNd" Loop="False" PeekAreaInsets="120" PositionChanged="OnAnythingChange" IsBounceEnabled="False">

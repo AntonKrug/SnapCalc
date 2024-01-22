@@ -24,7 +24,7 @@
 		<ApplicationTitle>SnapCalc</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.snapcalc</ApplicationId>
+		<ApplicationId>en.antonkrug.snapcalc</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>

@@ -267,8 +267,8 @@ namespace SnapCalc
             NewNdCombined.Text = $"Combined ND is {newNdCombined:F2} stops";
 
             int hours   = (int)Math.Round(newShutterSpeed / (60 * 60));
-            int minutes = (int)Math.Round((newShutterSpeed / 60) % 60);
-            int seconds = (int)Math.Round(newShutterSpeed % 60);
+            int minutes = (int)Math.Round(newShutterSpeed / 60) % 60;
+            int seconds = (int)Math.Round(newShutterSpeed) % 60;
 
             if (hours > 0)
             {

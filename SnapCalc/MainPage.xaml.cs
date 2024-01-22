@@ -31,6 +31,7 @@ namespace SnapCalc
                 new() { Name = "ND32",   Stops = 5,               Description = "5 stops variable" },
                 new() { Name = "ND64",   Stops = 6,               Description = "6 stops" },
                 new() { Name = "ND1000", Stops = Math.Log2(1000), Description = "~10 stops" },
+                new() { Name = "ND1024", Stops = 10,              Description = "10 stops" },
             ];
 
             CurrentNd.ItemsSource = itemsFilter;
@@ -38,7 +39,7 @@ namespace SnapCalc
             NewNd2.ItemsSource = itemsFilter;
 
             // The last filter option is the default position for NewNd1
-            NewNd1.Position = itemsFilter.Count - 1;
+            NewNd1.Position = itemsFilter.Count - 2;
         }
 
 

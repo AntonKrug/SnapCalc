@@ -5,12 +5,12 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="10,0" Spacing="24">
-            
-            
+
+
             <Image Source="snapcalc.png" HeightRequest="64" Aspect="AspectFit"/>
 
-            
-            <CarouselView x:Name="CurrentNd" Loop="False" PeekAreaInsets="140" PositionChanged="OnAnythingChange">
+
+            <CarouselView x:Name="CurrentNd" Loop="False" PeekAreaInsets="120" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
                 </CarouselView.ItemsLayout>
@@ -24,8 +24,8 @@
                 </CarouselView.ItemTemplate>
             </CarouselView>
 
-            
-            <CarouselView x:Name="CurrentShutter" Loop="False" PeekAreaInsets="140" PositionChanged="OnAnythingChange">
+
+            <CarouselView x:Name="CurrentShutter" Loop="False" PeekAreaInsets="120" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
                 </CarouselView.ItemsLayout>
@@ -40,7 +40,7 @@
             </CarouselView>
 
 
-            <CarouselView x:Name="CurrentAperture" Loop="False" PeekAreaInsets="140" PositionChanged="OnAnythingChange">
+            <CarouselView x:Name="CurrentAperture" Loop="False" PeekAreaInsets="120" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
                 </CarouselView.ItemsLayout>
@@ -54,7 +54,7 @@
             </CarouselView>
 
 
-            <CarouselView x:Name="CurrentIso" Loop="False" PeekAreaInsets="140" PositionChanged="OnAnythingChange">
+            <CarouselView x:Name="CurrentIso" Loop="False" PeekAreaInsets="120" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
                 </CarouselView.ItemsLayout>
@@ -73,71 +73,71 @@
 
             <Line X2="{Binding Width, Source={RelativeSource Self}}" Stroke="Gray" StrokeDashArray="10,10" />
 
-            <CarouselView x:Name="NewNd1" Loop="False" PeekAreaInsets="140" PositionChanged="OnAnythingChange">
-                <CarouselView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
-                </CarouselView.ItemsLayout>
-                <CarouselView.ItemTemplate>
-                    <DataTemplate>
-                        <VerticalStackLayout>
-                            <Label FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="{Binding Name}" />
-                            <Label FontSize="Micro" HorizontalTextAlignment="Center" Text="{Binding Description}" />
-                        </VerticalStackLayout>
-                    </DataTemplate>
-                </CarouselView.ItemTemplate>
-            </CarouselView>
-
-
-            <CarouselView x:Name="NewNd2" Loop="False" PeekAreaInsets="140" PositionChanged="OnAnythingChange">
-                <CarouselView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
-                </CarouselView.ItemsLayout>
-                <CarouselView.ItemTemplate>
-                    <DataTemplate>
-                        <VerticalStackLayout>
-                            <Label FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="{Binding Name}" />
-                            <Label FontSize="Micro" HorizontalTextAlignment="Center" Text="{Binding Description}" />
-                        </VerticalStackLayout>
-                    </DataTemplate>
-                </CarouselView.ItemTemplate>
-            </CarouselView>
-
-            
-            <Label x:Name="NewNdCombined" Text="" Style="{StaticResource NormalText}" />
-
-
-            <CarouselView x:Name="NewAperture" Loop="False" PeekAreaInsets="140" PositionChanged="OnAnythingChange">
-                <CarouselView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
-                </CarouselView.ItemsLayout>
-                <CarouselView.ItemTemplate>
-                    <DataTemplate>
-                        <VerticalStackLayout>
-                            <Label FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="{Binding .}" />
-                        </VerticalStackLayout>
-                    </DataTemplate>
-                </CarouselView.ItemTemplate>
-            </CarouselView>
-
-
-            <CarouselView x:Name="NewIso" Loop="False" PeekAreaInsets="140" PositionChanged="OnAnythingChange">
-                <CarouselView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
-                </CarouselView.ItemsLayout>
-                <CarouselView.ItemTemplate>
-                    <DataTemplate>
-                        <VerticalStackLayout>
-                            <Label FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="{Binding .}" />
-                        </VerticalStackLayout>
-                    </DataTemplate>
-                </CarouselView.ItemTemplate>
-            </CarouselView>
-
 
             <Label x:Name="NewShutterSpeed" Text="" Style="{StaticResource SubHeadline}" />
 
-            
+
+            <CarouselView x:Name="NewNd1" Loop="False" PeekAreaInsets="120" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
+                </CarouselView.ItemsLayout>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Label FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="{Binding Name}" />
+                            <Label FontSize="Micro" HorizontalTextAlignment="Center" Text="{Binding Description}" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+
+            <CarouselView x:Name="NewNd2" Loop="False" PeekAreaInsets="120" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
+                </CarouselView.ItemsLayout>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Label FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="{Binding Name}" />
+                            <Label FontSize="Micro" HorizontalTextAlignment="Center" Text="{Binding Description}" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+
+            <Label x:Name="NewNdCombined" Text="" Style="{StaticResource NormalText}" />
+
+
+            <CarouselView x:Name="NewAperture" Loop="False" PeekAreaInsets="120" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
+                </CarouselView.ItemsLayout>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Label FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="{Binding .}" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+
+            <CarouselView x:Name="NewIso" Loop="False" PeekAreaInsets="120" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
+                </CarouselView.ItemsLayout>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Label FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="{Binding .}" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

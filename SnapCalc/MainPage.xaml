@@ -10,7 +10,7 @@
             <!--<Image Source="snapcalc.png" HeightRequest="64" Aspect="AspectFit"/>-->
 
 
-            <CarouselView x:Name="CurrentNd" Loop="False" PeekAreaInsets="120" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
+            <CarouselView x:Name="CurrentNd" Loop="False" PeekAreaInsets="130" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
                 </CarouselView.ItemsLayout>
@@ -25,7 +25,7 @@
             </CarouselView>
 
 
-            <CarouselView x:Name="CurrentShutter" Loop="False" PeekAreaInsets="120" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
+            <CarouselView x:Name="CurrentShutter" Loop="False" PeekAreaInsets="130" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
                 </CarouselView.ItemsLayout>
@@ -40,7 +40,7 @@
             </CarouselView>
 
 
-            <CarouselView x:Name="CurrentAperture" Loop="False" PeekAreaInsets="120" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
+            <CarouselView x:Name="CurrentAperture" Loop="False" PeekAreaInsets="130" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
                 </CarouselView.ItemsLayout>
@@ -54,7 +54,7 @@
             </CarouselView>
 
 
-            <CarouselView x:Name="CurrentIso" Loop="False" PeekAreaInsets="120" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
+            <CarouselView x:Name="CurrentIso" Loop="False" PeekAreaInsets="130" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
                 </CarouselView.ItemsLayout>
@@ -77,7 +77,7 @@
             <Label x:Name="NewShutterSpeed" Text="" Style="{StaticResource SubHeadline}" />
 
 
-            <CarouselView x:Name="NewNd1" Loop="False" PeekAreaInsets="120" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
+            <CarouselView x:Name="NewNd1" Loop="False" PeekAreaInsets="130" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
                 </CarouselView.ItemsLayout>
@@ -92,7 +92,7 @@
             </CarouselView>
 
 
-            <CarouselView x:Name="NewNd2" Loop="False" PeekAreaInsets="120" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
+            <CarouselView x:Name="NewNd2" Loop="False" PeekAreaInsets="130" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
                 </CarouselView.ItemsLayout>
@@ -110,7 +110,7 @@
             <Label x:Name="NewNdCombined" Text="" Style="{StaticResource NormalText}" />
 
 
-            <CarouselView x:Name="NewAperture" Loop="False" PeekAreaInsets="120" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
+            <CarouselView x:Name="NewAperture" Loop="False" PeekAreaInsets="130" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
                 </CarouselView.ItemsLayout>
@@ -124,7 +124,7 @@
             </CarouselView>
 
 
-            <CarouselView x:Name="NewIso" Loop="False" PeekAreaInsets="120" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
+            <CarouselView x:Name="NewIso" Loop="False" PeekAreaInsets="130" PositionChanged="OnAnythingChange" IsBounceEnabled="False">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" SnapPointsType="Mandatory" SnapPointsAlignment="Center"/>
                 </CarouselView.ItemsLayout>

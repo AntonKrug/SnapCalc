@@ -23,15 +23,14 @@ namespace SnapCalc
         {
             List<FilterItem> itemsFilter =
             [
-                new() { Name = "ND1",    Stops = 0,               Description = "no filter" },
-                new() { Name = "ND2",    Stops = 1,               Description = "1 stop variable" },
-                new() { Name = "ND4",    Stops = 2,               Description = "2 stops" },
-                new() { Name = "ND8",    Stops = 3,               Description = "3 stops" },
-                new() { Name = "ND16",   Stops = 4,               Description = "4 stops variable" },
-                new() { Name = "ND32",   Stops = 5,               Description = "5 stops variable" },
-                new() { Name = "ND64",   Stops = 6,               Description = "6 stops" },
-                new() { Name = "ND1000", Stops = Math.Log2(1000), Description = "~10 stops" },
-                new() { Name = "ND1024", Stops = 10,              Description = "10 stops" },
+                new() { Name = "ND1",    Stops = 0,  Description = "no filter" },
+                new() { Name = "ND2",    Stops = 1,  Description = "1 stop variable" },
+                new() { Name = "ND4",    Stops = 2,  Description = "2 stops" },
+                new() { Name = "ND8",    Stops = 3,  Description = "3 stops" },
+                new() { Name = "ND16",   Stops = 4,  Description = "4 stops variable" },
+                new() { Name = "ND32",   Stops = 5,  Description = "5 stops variable" },
+                new() { Name = "ND64",   Stops = 6,  Description = "6 stops" },
+                new() { Name = "ND1000", Stops = 10, Description = "10 stops" },
             ];
 
             CurrentNd.ItemsSource = itemsFilter;
@@ -39,7 +38,7 @@ namespace SnapCalc
             NewNd2.ItemsSource = itemsFilter;
 
             // The last filter option is the default position for NewNd1
-            NewNd1.Position = itemsFilter.Count - 2;
+            NewNd1.Position = itemsFilter.Count - 1;
         }
 
 
@@ -262,9 +261,9 @@ namespace SnapCalc
             var newNdCombined = newNd1 + newNd2;
             var newShutterSpeed = CalculateShutterSpeed(ev - newNdCombined);
 
-            Ev.Text = $"Current exposure: {ev:F1}EV {CalculateLux(ev):F2}lux with ND {currentNd:F1}stops";
+            Ev.Text = $"Current exposure: {ev:F1}EV {CalculateLux(ev):F2}lux with ND {currentNd:F0}stops";
 
-            NewNdCombined.Text = $"Combined ND is {newNdCombined:F2} stops";
+            NewNdCombined.Text = $"Combined ND is {newNdCombined:F0} stops";
 
             int hours   = (int)Math.Round(newShutterSpeed / (60 * 60));
             int minutes = (int)Math.Round(newShutterSpeed / 60) % 60;
